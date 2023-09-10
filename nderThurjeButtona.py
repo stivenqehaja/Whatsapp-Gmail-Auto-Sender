@@ -76,7 +76,7 @@ def csv_command():
             # -------------WhatsApp-------------
 def run_wp():
     if not csv_file:
-        messagebox.showerror("Error", "Vendosni nje file-n CSV")
+        messagebox.showerror("Error", "Chose a CSV file")
         return
     pyautogui.hotkey('alt''tab')
     with open(csv_file, 'r') as csvfile:
@@ -85,7 +85,7 @@ def run_wp():
         pyautogui.hotkey('alt', 'tab')
         for number in numbers:
             text = textbox.get(1.0, tk.END)
-            text = text.replace("{emri}", number[1])
+            text = text.replace("{name}", number[1])
             window.clipboard_clear()
             window.clipboard_append(text)
 
@@ -114,7 +114,7 @@ def run_gmail():
         pyautogui.hotkey('alt', 'tab')
         for email in emails:
             subject = subject_box.get()
-            subject = subject.replace("{emri}", email[1])
+            subject = subject.replace("{name}", email[1])
             window.clipboard_clear()
             window.clipboard_append(subject)
             pyautogui.press('c')
@@ -127,7 +127,7 @@ def run_gmail():
             time.sleep(0.4)
             pyautogui.press('tab')
             message = message_box.get("1.0", tk.END)
-            message = message.replace("{emri}", email[1])
+            message = message.replace("{name}", email[1])
             window.clipboard_clear()
             window.clipboard_append(message)
             pyautogui.hotkey('ctrl', 'v')
@@ -201,12 +201,12 @@ gmail_button = tk.Button(left_frame, relief="flat", highlightthickness=0, image=
                          activeforeground='white', activebackground="black")
 # CSV Selection Area Left Frame
 csv_file_path = tk.StringVar()
-csv_file_label = tk.Label(left_frame, text="Zgjidhni File-n CSV", bg=gri, fg='white')
+csv_file_label = tk.Label(left_frame, text="Chose a CSV file", bg=gri, fg='white')
 csv_file_entry = tk.Entry(left_frame, textvariable=csv_file_path, state="readonly")
-csv_button = tk.Button(left_frame, relief="flat", text="CSV File", state=tk.DISABLED, command=csv_command, padx=10, pady=5, bg="white",
+csv_button = tk.Button(left_frame, relief="flat", text="CSV File", state=tk.DISABLED, command=csv_command, width=8, padx=10, pady=5, bg="white",
                        fg="black", bd=0, activeforeground='white', activebackground="black")
 # Label
-label = tk.Label(left_frame, text="Zgjidhni Programin", font=("Dancing Script", 16), bg=gri, fg='white')
+label = tk.Label(left_frame, text="Choose the script", font=("Dancing Script", 16), bg=gri, fg='white')
 # LEFT LABEL LAYOUT
 label.pack(pady=(100, 10))
 duplicate_button.pack(pady=(70, 0))
@@ -231,11 +231,11 @@ frames["Duplicate"] = tk.Frame(right_frame, width=600, height=700, bg=gri)
 frames["Duplicate"].pack_propagate(False)
 
 # container to hold 2 buttons
-container = tk.Label(frames["Duplicate"], bg=gri, fg="white", text="Ruan vetem numrin e pare unik")
+container = tk.Label(frames["Duplicate"], bg=gri, fg="white", text="Removes duplicate")
 # buttoni 1 left
-button_left = tk.Button(container,relief="flat", command=ruaj_first, text='Ndrysho', bg="#FF7F50")
-undo_button = tk.Button(container, relief="flat", text="Undo", command=undo_changes, bg="#FF0000")
-result_label = tk.Label(frames["Duplicate"], text='Sigurohuni te keni zgjedhur CSV file:', bg=gri, fg='white')
+button_left = tk.Button(container,relief="flat", command=ruaj_first, width=8, text='Change', bg="#FF7F50")
+undo_button = tk.Button(container, relief="flat", text="Undo", command=undo_changes, width=8, bg="#FF0000")
+result_label = tk.Label(frames["Duplicate"], text='Make sure to select a CSV file:', bg=gri, fg='white')
 # PACKING DUPLICATES TOP
 container.pack(side=tkinter.TOP)
 button_left.pack(side=tkinter.LEFT, pady=(140, 50), padx=(30, 30))
@@ -253,9 +253,9 @@ scrollbar.config(command=result_text.yview)
 frames["What's App"] = tk.Frame(right_frame, width=600, height=700, bg=gri)
 frames["What's App"].pack_propagate(False)
 
-mesazhi = tk.Label(frames["What's App"], text="Mesazhi:", font=("Arial", 14), bg=gri, fg=jeshile)
+mesazhi = tk.Label(frames["What's App"], text="Message Content:", font=("Arial", 14), bg=gri, fg=jeshile)
 textbox = tk.Text(frames["What's App"], height=20, width=50, bg=gri_leht, fg="white")
-run_wp = tk.Button(frames["What's App"], relief="flat", text="Run script", command=run_wp, padx=10, pady=5, bg=jeshile, fg="white",
+run_wp = tk.Button(frames["What's App"], relief="flat", text="Run script", command=run_wp, width=8, padx=10, pady=5, bg=jeshile, fg="white",
                        bd=0, activeforeground=jeshile, activebackground="white")
 
 mesazhi.pack(side=tkinter.TOP, pady=(120, 30))
@@ -269,17 +269,17 @@ frames["Gmail"].pack_propagate(False)
 subject_label = tk.Label(frames["Gmail"], text="Subject:", font=("Arial", 14), bg=gri, fg=kuqe)
 subject_box = tk.Entry(frames["Gmail"], width=50, bg=gri_leht, fg="white")
 
-message_label = tk.Label(frames["Gmail"], text="Mesazhi:", font=("Arial", 14), bg=gri, fg=kuqe)
+message_label = tk.Label(frames["Gmail"], text="Message Content:", font=("Arial", 14), bg=gri, fg=kuqe)
 message_box = tk.Text(frames["Gmail"], height=15, width=50, bg=gri_leht, fg="white")
 
-run_gmail = tk.Button(frames["Gmail"], relief="flat", text="Run", command=run_gmail, padx=10, pady=5, bg=kuqe, fg="white", bd=0,
+run_gmail = tk.Button(frames["Gmail"], relief="flat", text="Run Script", command=run_gmail, width=8, padx=10, pady=5, bg=kuqe, fg="white", bd=0,
                        activeforeground=kuqe, activebackground="white")
 
 subject_label.pack(side=tkinter.TOP, pady=(100, 0))
 subject_box.pack(side=tkinter.TOP, pady=(30, 35))
 
 message_label.pack(side=tkinter.TOP, pady=(0, 15))
-message_box.pack(side=tkinter.TOP, pady=(0, 50))
+message_box.pack(side=tkinter.TOP, pady=(0, 40))
 
 run_gmail.pack(side=tkinter.TOP, pady=(0, 20))
 
